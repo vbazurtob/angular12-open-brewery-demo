@@ -10,6 +10,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import {HttpClientModule} from "@angular/common/http";
 import {MaterialModule} from "./material.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import {StoreModule} from "@ngrx/store";
+// import {breweriesReducer} from "./landing-page.reducer";
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
+    // StoreModule.forRoot({ breweries: breweriesReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent]
