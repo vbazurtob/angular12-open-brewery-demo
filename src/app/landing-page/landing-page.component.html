@@ -1,3 +1,4 @@
 <app-autosuggest-input-field></app-autosuggest-input-field>
 <app-filter-panel></app-filter-panel>
-<app-data-table></app-data-table>
+{{service.getBreweries() | async}}
+<app-data-table [breweries]="breweries$ "></app-data-table>

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {OpenBreweryService} from "../services/open-brewery.service";
 // import {OpenBreweryService} from '../services/open-brewery.service';
-// import {Store} from "@ngrx/store";
-// import {selectBreweries} from "../landing-page.selector";
-// import {retrieveBreweries} from "../landing-page.actions";
+import {on, Store} from "@ngrx/store";
+import {selectBreweries} from "../landing-page.selector";
+import {retrieveBreweries} from "../landing-page.actions";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-landing-page',
@@ -12,19 +13,21 @@ import {OpenBreweryService} from "../services/open-brewery.service";
 })
 export class LandingPageComponent implements OnInit {
 
-  // breweries$ = this.store.select(selectBreweries);
+    ff: Observable<number> = Observable.create( (x: number) => 2);
+
+  breweries$ = this.store.select(selectBreweries);
 
   constructor(
       private service: OpenBreweryService,
-              // private store: Store
+              private store: Store
               ) { }
 
   ngOnInit(): void {
     this.service.getBreweries().subscribe(
         (breweries) => {
-            console.log(`breweries`);
-            console.log(breweries);
-          // this.store.dispatch(retrieveBreweries({ breweries }))
+            // console.log(`breweries`);
+            // console.log(breweries);
+          this.store.dispatch(retrieveBreweries({ breweries }))
         }
     );
   }
