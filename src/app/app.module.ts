@@ -27,6 +27,7 @@ import {StoreModule} from "@ngrx/store";
     HttpClientModule,
     MaterialModule,
     BrowserAnimationsModule,
+    StoreModule.forRoot({}, {}),
     // StoreModule.forRoot({}, {}),
 
     // StoreModule.forRoot({ breweries: breweriesReducer }),
