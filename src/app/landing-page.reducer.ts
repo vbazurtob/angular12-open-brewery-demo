@@ -6,5 +6,6 @@ export const initialState: ReadonlyArray<Brewery> = [];
 
 export const breweriesReducer = createReducer(
     initialState,
-    on(retrieveBreweries, (state, { breweries }) => breweries)
+    on(retrieveBreweries, (state, { breweries }) => breweries),
 );
+

@@ -13,14 +13,14 @@ export class OpenBreweryService {
 
   constructor(private http: HttpClient) { }
 
-  getBreweries(payload: string=''): Observable<Array<Brewery>>{
+  getBreweries(payload: string='', page: number = 1): Observable<Array<Brewery>>{
     // if(payload.length > 3) {
     //
     // } else {
     //
     // }
 
-    return this.http.get<any[]>(this.listBreweriesUrl)
+    return this.http.get<any[]>(this.listBreweriesUrl + `&page=${page}`)
         .pipe(
             map( (breweries: any[]) => {
                   return breweries.map( brewery => {
@@ -32,7 +32,7 @@ export class OpenBreweryService {
                       ...x
                     } = (brewery);
                     return x;
-                  });
+                  })  || [] ;
             })
         );
   }

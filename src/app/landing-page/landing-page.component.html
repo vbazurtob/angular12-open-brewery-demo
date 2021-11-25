@@ -1,4 +1,7 @@
-<app-autosuggest-input-field></app-autosuggest-input-field>
-<app-filter-panel></app-filter-panel>
-{{service.getBreweries() | async}}
-<app-data-table [breweries]="breweries$ "></app-data-table>
+<div class="page-container">
+    <app-autosuggest-input-field></app-autosuggest-input-field>
+    <app-filter-panel class="filters"></app-filter-panel>
+    <app-data-table [breweries]="( (breweries$ |async) || []  ) "
+(changePage)="onPageChanged($event)"
+    ></app-data-table>
+</div>

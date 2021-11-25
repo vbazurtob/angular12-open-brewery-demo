@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-autosuggest-input-field',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AutosuggestInputFieldComponent implements OnInit {
 
+  @Output() textChange = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  demo(e: any){
+    console.log(e.target.value);
+    this.textChange.emit(e.target.value);
+  }
 }

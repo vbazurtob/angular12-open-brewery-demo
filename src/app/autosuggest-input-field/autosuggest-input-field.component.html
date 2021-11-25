@@ -1,5 +1,7 @@
 <div class="input-search">
     <mat-form-field [appearance]="'outline'" >
-        <input matInput placeholder="Type a name search breweries around the world...">
+        <input matInput placeholder="Type a name search breweries around the world..."
+        (keyup)="demo($event)"
+        >
     </mat-form-field>
 </div>

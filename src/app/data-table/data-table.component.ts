@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {Brewery} from '../model/brewery.model';
 import {Observable} from "rxjs";
@@ -11,19 +11,14 @@ import {Observable} from "rxjs";
 export class DataTableComponent implements OnInit {
 
   @Input() breweries: ReadonlyArray<Brewery> = [];
+  @Output() changePage = new EventEmitter<number>();
 
   displayedColumns = [
     'name', 'type', 'city', 'country', 'link', 'phone'
   ]
 
-  // dataSource: any[] = [
-    // {
-    //   name: 'BNA'
-    // }
-  // ]
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

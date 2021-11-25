@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {OpenBreweryService} from "../services/open-brewery.service";
-// import {OpenBreweryService} from '../services/open-brewery.service';
-import {on, Store} from "@ngrx/store";
+import { Store} from "@ngrx/store";
 import {selectBreweries} from "../landing-page.selector";
 import {retrieveBreweries} from "../landing-page.actions";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-landing-page',
@@ -13,11 +11,9 @@ import {Observable} from "rxjs";
 })
 export class LandingPageComponent implements OnInit {
 
-    ff: Observable<number> = Observable.create( (x: number) => 2);
+    breweries$ = this.store.select(selectBreweries);
 
-  breweries$ = this.store.select(selectBreweries);
-
-  constructor(
+    constructor(
       private service: OpenBreweryService,
               private store: Store
               ) { }
@@ -25,15 +21,50 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
     this.service.getBreweries().subscribe(
         (breweries) => {
-            // console.log(`breweries`);
-            // console.log(breweries);
           this.store.dispatch(retrieveBreweries({ breweries }))
         }
     );
   }
 
-  // search(payload: string) {
-  //
-  // }
+
+  onPageChanged(page: number){
+    this.requestBreweries('', page);
+  }
+
+  onSearchText(evt: any){
+        //TODO
+      // fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
+      //
+      //     // get value
+      //     map((event: any) => {
+      //         return event.target.value;
+      //     })
+      //     , filter(res => res.length >3)
+      //     , debounceTime(1000)
+      //     , distinctUntilChanged()
+      //
+      // ).subscribe((text: string) => {
+      //
+      //     this.isSearching = true;
+      //
+      //     this.searchGetCall(text).subscribe((res) => {
+      //         console.log('res', res);
+      //         this.isSearching = false;
+      //         this.apiResponse = res;
+      //     }, (err) => {
+      //         this.isSearching = false;
+      //         console.log('error', err);
+      //     });
+      //
+      // });
+  }
+
+  requestBreweries(payload = '', page = 1){
+      this.service.getBreweries(payload, page + 1 ).subscribe(
+          (breweries) => {
+              this.store.dispatch(retrieveBreweries({ breweries }))
+          }
+      );
+  }
 
 }
