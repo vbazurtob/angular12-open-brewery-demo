@@ -32,31 +32,6 @@ export class LandingPageComponent implements OnInit {
   }
 
   onSearchText(evt: any){
-        //TODO
-      // fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
-      //
-      //     // get value
-      //     map((event: any) => {
-      //         return event.target.value;
-      //     })
-      //     , filter(res => res.length >3)
-      //     , debounceTime(1000)
-      //     , distinctUntilChanged()
-      //
-      // ).subscribe((text: string) => {
-      //
-      //     this.isSearching = true;
-      //
-      //     this.searchGetCall(text).subscribe((res) => {
-      //         console.log('res', res);
-      //         this.isSearching = false;
-      //         this.apiResponse = res;
-      //     }, (err) => {
-      //         this.isSearching = false;
-      //         console.log('error', err);
-      //     });
-      //
-      // });
   }
 
   requestBreweries(payload = '', page = 1){
