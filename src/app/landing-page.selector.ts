@@ -33,6 +33,14 @@ export const selectCurrentSelectedBrewery =
         }
     );
 
+export const selectBreweryCoordinates =
+    createSelector(
+        selectSelectedBrewery,
+        (brewery) => {
+            return new google.maps.LatLng(brewery.latitude,brewery.longitude);;
+        }
+    );
+
 export const selectCurrentPage =
     createSelector(
         selectPage,

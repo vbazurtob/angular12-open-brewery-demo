@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {OpenBreweryService} from "../services/open-brewery.service";
 import {ActivatedRoute, Params} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {selectSelectedBrewery} from "../landing-page.selector";
+import {selectBreweryCoordinates, selectCurrentSelectedBrewery, selectSelectedBrewery} from "../landing-page.selector";
 import {updateSelectedBrewery} from "../landing-page.actions";
 
 @Component({
@@ -12,23 +12,22 @@ import {updateSelectedBrewery} from "../landing-page.actions";
 })
 export class DetailsPageComponent implements OnInit {
 
-  selectedBrewery$ = this.store.select(selectSelectedBrewery);
-  // brewery: any;
+  selectedBrewery$ = this.store.select(selectCurrentSelectedBrewery);
+  selectBreweryCoordinates$ = this.store.select(selectBreweryCoordinates);
 
   constructor(private route: ActivatedRoute, private service: OpenBreweryService, private store: Store) { }
 
+  defaultCenter = new google.maps.LatLng(0,0);
   ngOnInit(): void {
-    // this.brewery = {};
+
 
     this.route.params.subscribe( (params: Params) =>
         {
           this.service.getById(params['id']).subscribe((d) =>
-              // this.brewery = (d)
               this.store.dispatch(updateSelectedBrewery({selectedBrewery: d}))
           );
         }
     );
-    // this.service.getBreweryByIdUrl()
   }
 
 }

@@ -19,6 +19,7 @@ import {
   suggestionsReducer
 } from "./landing-page.reducer";
 import { DetailsPageComponent } from './details-page/details-page.component';
+import {GoogleMapsModule} from "@angular/google-maps";
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { DetailsPageComponent } from './details-page/details-page.component';
     HttpClientModule,
     MaterialModule,
     BrowserAnimationsModule,
+    GoogleMapsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

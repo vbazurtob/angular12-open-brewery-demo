@@ -6,7 +6,8 @@
 
         <div class="flex-row flex-space-between">
             <div>Url:</div>
-            <div>{{ (selectedBrewery$ | async)?.website_url}} </div>
+            <div><a href="{{ (selectedBrewery$ | async)?.website_url}}" target="_blank">
+                {{ (selectedBrewery$ | async)?.website_url}} </a></div>
         </div>
         <div class="flex-row flex-space-between">
             <div>Street:</div>
@@ -30,9 +31,21 @@
         </div>
     </div>
 
-    Google map below
-<!--    <div class="flex-row flex-space-between">-->
-<!--        <div>Location:</div>-->
-<!--        <div>{{brewery.location}}</div>-->
-<!--    </div>-->
+    <div>
+            <div class="flex-row flex-space-between">
+                <div>Location:</div>
+                <div>{{ (selectedBrewery$ | async)?.latitude}}</div>
+            </div>
+        <google-map
+                height="500px"
+                width="100%"
+                [zoom]="17"
+                [center]="(selectBreweryCoordinates$ | async) ||   defaultCenter">
+            <map-marker
+                    [position]="(selectBreweryCoordinates$ | async) ||   defaultCenter"
+                    [label]=" (selectedBrewery$ | async)?.name || ''"
+                    [title]=" (selectedBrewery$ | async)?.name || ''"
+            > </map-marker>
+        </google-map>
+    </div>
 </div>
