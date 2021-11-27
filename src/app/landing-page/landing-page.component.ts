@@ -3,6 +3,7 @@ import {OpenBreweryService} from "../services/open-brewery.service";
 import { Store} from "@ngrx/store";
 import {selectBreweries} from "../landing-page.selector";
 import {retrieveBreweries} from "../landing-page.actions";
+import {Brewery} from "../model/brewery.model";
 
 @Component({
   selector: 'app-landing-page',
@@ -12,6 +13,10 @@ import {retrieveBreweries} from "../landing-page.actions";
 export class LandingPageComponent implements OnInit {
 
     breweries$ = this.store.select(selectBreweries);
+
+    isSearching = false;
+
+    breweriesSuggestions: ReadonlyArray<Brewery> = [];
 
     constructor(
       private service: OpenBreweryService,
@@ -43,4 +48,31 @@ export class LandingPageComponent implements OnInit {
       );
   }
 
+  debounceText(e:string){
+        this.isSearching = true;
+        this.breweriesSuggestions = [];
+        this.service.searchBreweries(e).subscribe(
+            {
+                next:
+                    async (breweries)  => {
+                        await this.delay(3000);
+
+                        this.isSearching = false;
+
+                        console.log(breweries);
+                        this.breweriesSuggestions = breweries;
+
+
+                    },
+                error:
+                    error => this.isSearching = false
+
+            }
+        );
+  }
+
+    private delay(ms: number)
+    {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 }
