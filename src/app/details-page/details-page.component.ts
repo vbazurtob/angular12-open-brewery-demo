@@ -16,6 +16,7 @@ export class DetailsPageComponent implements OnInit {
   selectBreweryCoordinates$ = this.store.select(selectBreweryCoordinates);
   readonly defaultCenter = new google.maps.LatLng(0,0);
 
+
   constructor(private route: ActivatedRoute, private service: OpenBreweryService, private store: Store) { }
   ngOnInit(): void {
     this.route.params.subscribe( (params: Params) =>

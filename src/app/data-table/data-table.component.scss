@@ -1,9 +1,22 @@
-//.table-container{
-//  width: 80%;
-//}
+.mat-column-city {
+  flex: 0 0 10%;
+}
+.mat-column-type {
+  flex: 0 0 10%;
+}
 
-a[ng-reflect-router-link] {
-  fontcolor: red;
-  font-weight: 700;
-  font-size: 25px;
+.mat-column-country {
+  flex: 0 0 10%;
+}
+.mat-column-country {
+  flex: 0 0 11%;
+}
+
+.mat-column-phone {
+  flex: 0 0 10%;
+}
+
+a{
+  cursor: pointer;
+  color: blue;
 }

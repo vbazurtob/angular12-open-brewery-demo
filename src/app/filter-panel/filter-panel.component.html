@@ -1,14 +1,18 @@
 
-<div class="filters">
-    <mat-form-field>
-        <mat-label #lblName>Name</mat-label>
-        <input #nameFilter aria-label="lblName"  matInput placeholder="Type a name">
-    </mat-form-field>
+<div class="filter-panel-container">
+    <mat-card>
+        <div class="filters flex-row flex-space-between flex-align-items-start">
+            <mat-form-field>
+                <mat-label #lblName>Name</mat-label>
+                <input #nameFilter aria-label="lblName"  matInput placeholder="Type a name">
+            </mat-form-field>
 
-    <mat-form-field>
-        <mat-label #lblCity>City</mat-label>
-        <input #cityFilter aria-label="lblCity"  matInput placeholder="Type a city">
-    </mat-form-field>
+            <mat-form-field>
+                <mat-label #lblCity>City</mat-label>
+                <input #cityFilter aria-label="lblCity"  matInput placeholder="Type a city">
+            </mat-form-field>
 
-    <a mat-raised-button color="primary" (click)="filterResults()">Filter</a>
+            <a mat-raised-button color="primary" (click)="filterResults()">Filter</a>
+        </div>
+    </mat-card>
 </div>

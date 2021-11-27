@@ -6,7 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ng12-open-breweries';
-
-
+  title = 'Open breweries demo (Using ng12 & ngrx) - By: Voltaire Bazurto';
 }

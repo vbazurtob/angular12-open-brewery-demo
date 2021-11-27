@@ -1,18 +1,23 @@
+
 <div class="input-search">
-    <mat-form-field [appearance]="'outline'" >
-        <input #inputSearch matInput placeholder="Type a name search breweries around the world..."
-               [matAutocomplete]="auto" >
-    </mat-form-field>
-    <div *ngIf="isLoading">
-        Loading :)
-    </div>
+    <mat-card>
+
+        <div class="flex-row flex-align-items-start flex-start">
+            <mat-form-field [appearance]="'outline'" >
+                <input #inputSearch matInput placeholder="Type a name search breweries around the world..."
+                       [matAutocomplete]="auto" >
+            </mat-form-field>
+            <div *ngIf="isLoading" class="loading-message">
+                Loading...
+            </div>
+        </div>
+
     <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let item of breweries" [value]="item.name">
-                <a *ngIf="!isLoading" [routerLink]="'/details/'+item.id" >
-                    <div>
+                <a class="suggestion-item" *ngIf="!isLoading" [routerLink]="'/details/'+item.id" >
                         {{item.name}}
-                    </div>
                 </a>
             </mat-option>
     </mat-autocomplete>
+    </mat-card>
 </div>

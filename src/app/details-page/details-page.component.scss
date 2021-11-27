@@ -1,15 +1,4 @@
-.flex-row{
-  display: flex;
-  flex-direction: row;
-}
 
-.flex-start{
-  justify-content: flex-start;
-}
-
-.flex-space-between{
-  justify-content: space-between;
-}
 
 .details-container{
   width: 80%;
@@ -21,4 +10,19 @@
 
 .info-container{
   width: 30%;
+  margin-top: 16px;
+  margin-bottom: 16px;
+
+}
+
+.brewery-name{
+  color: indigo;
+}
+
+.no-map{
+  background-color: white;
+  height: 400px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }

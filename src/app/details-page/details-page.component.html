@@ -2,51 +2,57 @@
     <a routerLink="/" mat-raised-button color="accent">Back</a>
 
     <div class="info-container">
+        <mat-card>
+            <h1>Brewery Details</h1>
+            <h2 class="brewery-name">{{ (selectedBrewery$ | async)?.name}}</h2>
 
-        <h3>{{ (selectedBrewery$ | async)?.name}}</h3>
-
-        <div class="flex-row flex-space-between">
-            <div>Url:</div>
-            <div><a href="{{ (selectedBrewery$ | async)?.website_url}}" target="_blank">
-                {{ (selectedBrewery$ | async)?.website_url}} </a></div>
-        </div>
-        <div class="flex-row flex-space-between">
-            <div>Street:</div>
-            <div>{{ (selectedBrewery$ | async)?.street}}</div>
-        </div>
-        <div class="flex-row flex-space-between">
-            <div>City:</div>
-            <div>{{ (selectedBrewery$ | async)?.city}}</div>
-        </div>
-        <div class="flex-row flex-space-between">
-            <div>State/Province:</div>
-            <div>{{ (selectedBrewery$ | async)?.state}}</div>
-        </div>
-        <div class="flex-row flex-space-between">
-            <div>Postal Code:</div>
-            <div>{{ (selectedBrewery$ | async)?.postal_code}}</div>
-        </div>
-        <div class="flex-row flex-space-between">
-            <div>Country:</div>
-            <div>{{ (selectedBrewery$ | async)?.country}}</div>
-        </div>
-    </div>
-
-    <div class="map-container">
             <div class="flex-row flex-space-between">
-                <div>Location:</div>
-                <div>{{ (selectedBrewery$ | async)?.latitude}}</div>
+                <div>Url:</div>
+                <div><a href="{{ (selectedBrewery$ | async)?.website_url}}" target="_blank">
+                    {{ (selectedBrewery$ | async)?.website_url}} </a></div>
             </div>
-        <google-map
-                height="500px"
-                width="100%"
-                [zoom]="17"
-                [center]="(selectBreweryCoordinates$ | async) ||   defaultCenter">
-            <map-marker
-                    [position]="(selectBreweryCoordinates$ | async) ||   defaultCenter"
-                    [label]=" (selectedBrewery$ | async)?.name || ''"
-                    [title]=" (selectedBrewery$ | async)?.name || ''"
-            > </map-marker>
-        </google-map>
+            <div class="flex-row flex-space-between">
+                <div>Street:</div>
+                <div>{{ (selectedBrewery$ | async)?.street}}</div>
+            </div>
+            <div class="flex-row flex-space-between">
+                <div>City:</div>
+                <div>{{ (selectedBrewery$ | async)?.city}}</div>
+            </div>
+            <div class="flex-row flex-space-between">
+                <div>State/Province:</div>
+                <div>{{ (selectedBrewery$ | async)?.state}}</div>
+            </div>
+            <div class="flex-row flex-space-between">
+                <div>Postal Code:</div>
+                <div>{{ (selectedBrewery$ | async)?.postal_code}}</div>
+            </div>
+            <div class="flex-row flex-space-between">
+                <div>Country:</div>
+                <div>{{ (selectedBrewery$ | async)?.country}}</div>
+            </div>
+        </mat-card>
     </div>
+
+        <div *ngIf="(selectedBrewery$ | async)?.latitude == null" class="no-map flex-row " >
+                    <div>Location:&nbsp; </div>
+                    <div>No location information was found!</div>
+        </div>
+
+        <div *ngIf="(selectedBrewery$ | async)?.latitude != null" class="map-container">
+
+            <google-map
+                    height="400px"
+                    width="100%"
+                    [zoom]="17"
+                    [center]="(selectBreweryCoordinates$ | async) ||   defaultCenter">
+
+                    <map-marker
+                                [position]="(selectBreweryCoordinates$ | async) ||   defaultCenter"
+                                [label]=" (selectedBrewery$ | async)?.name || ''"
+                                [title]=" (selectedBrewery$ | async)?.name || ''"></map-marker>
+
+            </google-map>
+        </div>
+
 </div>

@@ -31,8 +31,6 @@ export class LandingPageComponent implements OnInit {
     currentFiltersAndPage$ = this.store.select(selectPageAndFilters);
     isSearching$ = this.store.select(selectIsSearching);
 
-    // isSearching = false;
-
     constructor(
       private service: OpenBreweryService,
               private store: Store
@@ -66,11 +64,7 @@ export class LandingPageComponent implements OnInit {
             {
                 next:
                     async (breweries)  => {
-                        await this.delay(3000);
-
                         this.store.dispatch(updateIsSearching({isSearching: false}))
-                        console.log(breweries);
-                        // this.breweriesSuggestions = breweries;
                         this.store.dispatch(setSuggestionsForBreweries({suggestions: breweries}));
                     },
                 error:
