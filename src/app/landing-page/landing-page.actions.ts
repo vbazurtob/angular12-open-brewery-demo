@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import {Brewery} from "./model/brewery.model";
-import {SearchFilters} from "./model/searchFilters.model";
+import {Brewery} from "../model/brewery.model";
+import {SearchFilters} from "../model/searchFilters.model";
 
 export const setCurrentBreweries = createAction(
     '[Data table] List Breweries',

@@ -1,6 +1,6 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
-import {Brewery} from "./model/brewery.model";
-import {SearchFilters} from "./model/searchFilters.model";
+import {Brewery} from "../model/brewery.model";
+import {SearchFilters} from "../model/searchFilters.model";
 export const selectBreweries = createFeatureSelector<ReadonlyArray<Brewery>>('breweries');
 export const selectSuggestions = createFeatureSelector<ReadonlyArray<Brewery>>('suggestions');
 export const selectPage = createFeatureSelector<number>('page');
@@ -17,13 +17,7 @@ export const selectBreweriesState =
         }
     );
 
-export const selectCurrentSuggestions =
-    createSelector(
-        selectIsSearching,
-        (isSearching) => {
-            return isSearching;
-        }
-    );
+
 
 export const selectCurrentSelectedBrewery =
     createSelector(
@@ -37,7 +31,7 @@ export const selectBreweryCoordinates =
     createSelector(
         selectSelectedBrewery,
         (brewery) => {
-            return new google.maps.LatLng(brewery.latitude,brewery.longitude);;
+            return new google.maps.LatLng(brewery.latitude,brewery.longitude);
         }
     );
 

@@ -17,7 +17,7 @@ import {
   pageReducer,
   searchFilterReducer, selectedBreweryReducer,
   suggestionsReducer
-} from "./landing-page.reducer";
+} from "./landing-page/landing-page.reducer";
 import { DetailsPageComponent } from './details-page/details-page.component';
 import {GoogleMapsModule} from "@angular/google-maps";
 

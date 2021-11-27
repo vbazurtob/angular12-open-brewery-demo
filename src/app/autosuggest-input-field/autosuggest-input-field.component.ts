@@ -27,7 +27,6 @@ export class AutosuggestInputFieldComponent implements OnInit {
 
   debounceSearch(){
     fromEvent(this.inputSearch.nativeElement, 'keyup').pipe(
-          // get value
           map((event: any) => {
               return event.target.value;
           })

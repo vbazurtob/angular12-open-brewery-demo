@@ -1,7 +1,13 @@
 <div class="details-container">
-    <a routerLink="/" mat-raised-button color="accent">Back</a>
+    <div class="flex-row flex-space-between">
+        <a routerLink="/" mat-raised-button color="primary">Back</a>
 
-    <div class="info-container">
+        <div *ngIf="isLoading" class="loading-message">
+            Loading...
+        </div>
+    </div>
+
+    <div *ngIf="!isLoading" class="info-container">
         <mat-card>
             <h1>Brewery Details</h1>
             <h2 class="brewery-name">{{ (selectedBrewery$ | async)?.name}}</h2>
@@ -34,9 +40,10 @@
         </mat-card>
     </div>
 
+    <div *ngIf="!isLoading">
         <div *ngIf="(selectedBrewery$ | async)?.latitude == null" class="no-map flex-row " >
-                    <div>Location:&nbsp; </div>
-                    <div>No location information was found!</div>
+            <div>Location:&nbsp; </div>
+            <div>No location information was found!</div>
         </div>
 
         <div *ngIf="(selectedBrewery$ | async)?.latitude != null" class="map-container">
@@ -47,12 +54,14 @@
                     [zoom]="17"
                     [center]="(selectBreweryCoordinates$ | async) ||   defaultCenter">
 
-                    <map-marker
-                                [position]="(selectBreweryCoordinates$ | async) ||   defaultCenter"
-                                [label]=" (selectedBrewery$ | async)?.name || ''"
-                                [title]=" (selectedBrewery$ | async)?.name || ''"></map-marker>
+                <map-marker
+                        [position]="(selectBreweryCoordinates$ | async) ||   defaultCenter"
+                        [label]=" (selectedBrewery$ | async)?.name || ''"
+                        [title]=" (selectedBrewery$ | async)?.name || ''"></map-marker>
 
             </google-map>
         </div>
+    </div>
+
 
 </div>

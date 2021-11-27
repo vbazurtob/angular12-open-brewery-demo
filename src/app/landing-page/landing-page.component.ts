@@ -7,15 +7,15 @@ import {
     selectCurrentPage, selectIsSearching,
     selectPageAndFilters,
     selectSuggestions
-} from "../landing-page.selector";
+} from "./landing-page.selector";
 import {
     setCurrentBreweries,
     setSuggestionsForBreweries,
     updateCurrentPage,
     updateFilters, updateIsSearching
-} from "../landing-page.actions";
+} from "./landing-page.actions";
 import {SearchFilters} from "../model/searchFilters.model";
-import {pageInitialState, suggestionsInitialState} from "../landing-page.reducer";
+import {pageInitialState, suggestionsInitialState} from "./landing-page.reducer";
 
 @Component({
   selector: 'app-landing-page',
@@ -78,8 +78,4 @@ export class LandingPageComponent implements OnInit {
       this.store.dispatch(updateCurrentPage({page: pageInitialState }));
   }
 
-  private delay(ms: number)
-  {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
 }

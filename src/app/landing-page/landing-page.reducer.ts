@@ -1,4 +1,4 @@
-import {Brewery} from "./model/brewery.model";
+import {Brewery} from "../model/brewery.model";
 import {createReducer, on} from "@ngrx/store";
 import {
     setCurrentBreweries,
