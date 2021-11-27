@@ -1,9 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {OpenBreweryService} from "../services/open-brewery.service";
 import { Store} from "@ngrx/store";
-import {selectBreweries} from "../landing-page.selector";
-import {retrieveBreweries} from "../landing-page.actions";
-import {Brewery} from "../model/brewery.model";
+import {
+    selectBreweries,
+    selectCurrentFilters,
+    selectCurrentPage,
+    selectPageAndFilters,
+    selectSuggestions
+} from "../landing-page.selector";
+import {
+    setCurrentBreweries,
+    setSuggestionsForBreweries,
+    updateCurrentPage,
+    updateFilters
+} from "../landing-page.actions";
+import {SearchFilters} from "../model/searchFilters.model";
+import {pageInitialState, suggestionsInitialState} from "../landing-page.reducer";
 
 @Component({
   selector: 'app-landing-page',
@@ -13,10 +25,12 @@ import {Brewery} from "../model/brewery.model";
 export class LandingPageComponent implements OnInit {
 
     breweries$ = this.store.select(selectBreweries);
+    suggestions$ = this.store.select(selectSuggestions);
+    currentPage$ = this.store.select(selectCurrentPage);
+    currentFilters$ = this.store.select(selectCurrentFilters);
+    currentFiltersAndPage$ = this.store.select(selectPageAndFilters);
 
     isSearching = false;
-
-    breweriesSuggestions: ReadonlyArray<Brewery> = [];
 
     constructor(
       private service: OpenBreweryService,
@@ -24,33 +38,29 @@ export class LandingPageComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
-    this.service.getBreweries().subscribe(
-        (breweries) => {
-            console.log(breweries);
-          this.store.dispatch(retrieveBreweries({ breweries }))
-        }
-    );
-  }
+      this.store.dispatch(updateCurrentPage({page: pageInitialState}));
 
+      this.currentFiltersAndPage$.subscribe( (filtersAndPage) =>
+          this.requestBreweries(filtersAndPage.filters, filtersAndPage.page)
+      );
+  }
 
   onPageChanged(page: number){
-    this.requestBreweries('', page);
+    this.store.dispatch(updateCurrentPage({page: page}));
   }
 
-  onSearchText(evt: any){
-  }
 
-  requestBreweries(payload = '', page = 1){
-      this.service.getBreweries(payload, page + 1 ).subscribe(
+  requestBreweries(payload: SearchFilters, page: number){
+      this.service.getBreweries(payload, page ).subscribe(
           (breweries) => {
-              this.store.dispatch(retrieveBreweries({ breweries }))
+              this.store.dispatch(setCurrentBreweries({ breweries }))
           }
       );
   }
 
   debounceText(e:string){
         this.isSearching = true;
-        this.breweriesSuggestions = [];
+        this.store.dispatch(setSuggestionsForBreweries({suggestions: suggestionsInitialState}));
         this.service.searchBreweries(e).subscribe(
             {
                 next:
@@ -60,9 +70,8 @@ export class LandingPageComponent implements OnInit {
                         this.isSearching = false;
 
                         console.log(breweries);
-                        this.breweriesSuggestions = breweries;
-
-
+                        // this.breweriesSuggestions = breweries;
+                        this.store.dispatch(setSuggestionsForBreweries({suggestions: breweries}));
                     },
                 error:
                     error => this.isSearching = false
@@ -71,8 +80,13 @@ export class LandingPageComponent implements OnInit {
         );
   }
 
-    private delay(ms: number)
-    {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+  filterBreweries(filters: SearchFilters){
+      this.store.dispatch(updateFilters({searchPayload: filters}));
+      this.store.dispatch(updateCurrentPage({page: pageInitialState }));
+  }
+
+  private delay(ms: number)
+  {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 }

@@ -11,12 +11,14 @@ import {Router} from "@angular/router";
 })
 export class DataTableComponent implements OnInit {
 
+  @Input() currentPage: number = 1;
   @Input() breweries: ReadonlyArray<Brewery> = [];
   @Output() changePage = new EventEmitter<number>();
 
-  displayedColumns = [
+  readonly displayedColumns = [
     'name', 'type', 'city', 'country', 'link', 'phone'
   ]
+  readonly maxItemsPerPage = 15;
 
   constructor(private router: Router) { }
 
@@ -25,5 +27,14 @@ export class DataTableComponent implements OnInit {
 
   go(id: number){
     this.router.navigate(['details', id]);
+  }
+
+  computeMaxLength(paginator: any){
+    if(this.breweries.length < this.maxItemsPerPage) {
+      return this.breweries.length;
+    }
+    return (this.breweries.length * (paginator.pageIndex == 0 ?
+            1: paginator.pageIndex
+    )) + 16;
   }
 }

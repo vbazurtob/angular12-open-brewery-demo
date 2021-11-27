@@ -1,29 +1,33 @@
 <div class="details-container">
-    <h3>{{brewery.name}}</h3>
 
-    <div class="flex-row flex-space-between">
-        <div>Url:</div>
-        <div>{{brewery.url}} </div>
-    </div>
-    <div class="flex-row flex-space-between">
-        <div>Street:</div>
-        <div>{{brewery.street}}</div>
-    </div>
-    <div class="flex-row flex-space-between">
-        <div>City:</div>
-        <div>{{brewery.city}}</div>
-    </div>
-    <div class="flex-row flex-space-between">
-        <div>State/Province:</div>
-        <div>{{brewery.state}}</div>
-    </div>
-    <div class="flex-row flex-space-between">
-        <div>Postal Code:</div>
-        <div>{{brewery.post}}</div>
-    </div>
-    <div class="flex-row flex-space-between">
-        <div>Country:</div>
-        <div>{{brewery.country}}</div>
+    <div >
+
+        <h3>{{ (selectedBrewery$ | async)?.name}}</h3>
+
+        <div class="flex-row flex-space-between">
+            <div>Url:</div>
+            <div>{{ (selectedBrewery$ | async)?.website_url}} </div>
+        </div>
+        <div class="flex-row flex-space-between">
+            <div>Street:</div>
+            <div>{{ (selectedBrewery$ | async)?.street}}</div>
+        </div>
+        <div class="flex-row flex-space-between">
+            <div>City:</div>
+            <div>{{ (selectedBrewery$ | async)?.city}}</div>
+        </div>
+        <div class="flex-row flex-space-between">
+            <div>State/Province:</div>
+            <div>{{ (selectedBrewery$ | async)?.state}}</div>
+        </div>
+        <div class="flex-row flex-space-between">
+            <div>Postal Code:</div>
+            <div>{{ (selectedBrewery$ | async)?.postal_code}}</div>
+        </div>
+        <div class="flex-row flex-space-between">
+            <div>Country:</div>
+            <div>{{ (selectedBrewery$ | async)?.country}}</div>
+        </div>
     </div>
 
     Google map below
@@ -32,12 +36,3 @@
 <!--        <div>{{brewery.location}}</div>-->
 <!--    </div>-->
 </div>
-
-<!--Brewery Name-->
-<!--Brewery URL-->
-<!--Street-->
-<!--City-->
-<!--State/Province-->
-<!--Postal Code-->
-<!--Country-->
-<!--A google map render with the provided coordinates (Bonus)-->

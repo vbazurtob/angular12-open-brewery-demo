@@ -15,6 +15,7 @@ export class AutosuggestInputFieldComponent implements OnInit {
   @Output() textChange = new EventEmitter<string>();
   @ViewChild('inputSearch') inputSearch!: ElementRef<HTMLInputElement>;
 
+
   constructor() { }
 
   ngOnInit(): void {

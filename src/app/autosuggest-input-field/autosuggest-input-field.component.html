@@ -7,15 +7,12 @@
         Loading :)
     </div>
     <mat-autocomplete #auto="matAutocomplete">
-
             <mat-option *ngFor="let item of breweries" [value]="item.name">
-
                 <a *ngIf="!isLoading" [routerLink]="'/details/'+item.id" >
                     <div>
                         {{item.name}}
                     </div>
                 </a>
             </mat-option>
-
     </mat-autocomplete>
 </div>

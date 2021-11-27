@@ -1,9 +1,13 @@
 <h3>AngularJS Challenge using NgRX</h3>
 <h4>Author: Voltaire Bazurto</h4>
 <div class="page-container">
-    <app-autosuggest-input-field [isLoading]="isSearching" [breweries]="breweriesSuggestions" (textChange)="debounceText($event)"></app-autosuggest-input-field>
-    <app-filter-panel class="filters"></app-filter-panel>
-    <app-data-table [breweries]="( (breweries$ |async) || []  ) "
-(changePage)="onPageChanged($event)"
-    ></app-data-table>
+    <app-autosuggest-input-field
+            [isLoading]="isSearching"
+            [breweries]="(suggestions$ | async) || []"
+            (textChange)="debounceText($event)"></app-autosuggest-input-field>
+    <app-filter-panel (filtersEventEmitter)="filterBreweries($event)" class="filters"></app-filter-panel>
+    <app-data-table
+        [breweries]="( (breweries$ |async) || []  ) "
+        (changePage)="onPageChanged($event)"
+        [currentPage]="(currentPage$ | async) || 0"></app-data-table>
 </div>

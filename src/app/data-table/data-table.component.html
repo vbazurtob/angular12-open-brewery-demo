@@ -1,6 +1,4 @@
 
-
-
 <div class="table-container mat-elevation-z8">
 
     <mat-table #table [dataSource]="breweries">
@@ -24,7 +22,7 @@
         <!-- City Column -->
         <ng-container matColumnDef="city">
             <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>
         </ng-container>
 
         <!-- Country Column -->
@@ -36,7 +34,7 @@
         <!-- Link Column -->
         <ng-container matColumnDef="link">
             <mat-header-cell *matHeaderCellDef> Link </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.link}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.website_url}} </mat-cell>
         </ng-container>
 
         <!-- Phone Column -->
@@ -54,10 +52,12 @@
         </tr>
     </mat-table>
 
-    <mat-paginator #paginator [showFirstLastButtons]="true"  [length]="(breweries.length * (paginator.pageIndex == 0 ?
-      1: paginator.pageIndex
-      )) + 16" [pageSizeOptions]="[15]" aria-label="Select page of breweries"
-    (page)="changePage.emit($event.pageIndex)"
+    {{currentPage}}
+    <mat-paginator #paginator [showFirstLastButtons]="true"  [length]="computeMaxLength(paginator)"
+        [pageSizeOptions]="[maxItemsPerPage]"
+        aria-label="Select page of breweries"
+        (page)="changePage.emit($event.pageIndex)"
+        pageIndex="{{currentPage}}"
     ></mat-paginator>
 </div>
 

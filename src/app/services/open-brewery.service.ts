@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Brewery} from "../model/brewery.model";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
+import {SearchFilters} from "../model/searchFilters.model";
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +15,25 @@ export class OpenBreweryService {
   searchBreweriesUrl = 'https://api.openbrewerydb.org/breweries/search?query='
   constructor(private http: HttpClient) { }
 
-  getBreweries(payload: string='', page: number = 1): Observable<Array<Brewery>>{
-    // if(payload.length > 3) {
-    //
-    // } else {
-    //
-    // }
+  private formatFilters(filters: SearchFilters){
+    let filterQueryString = '';
+    filterQueryString+= filters.name != '' ? `by_name=${encodeURI(filters.name)}&` : '';
+    filterQueryString+= filters.city != '' ? `by_city=${encodeURI(filters.city)}` : '';
+    return filterQueryString;
+  }
 
-    return this.http.get<any[]>(this.listBreweriesUrl + `&page=${page}`)
+  filterBreweries(filters: SearchFilters, page=1){
+    return this.getBreweries(
+        filters,
+        page
+    )
+  }
+
+  getBreweries(filters: SearchFilters, page: number = 1): Observable<Array<Brewery>>{
+    // API accepts page from index 1. Data table start its index from 0. We add one to comply
+    // with the API contract
+    page++;
+    return this.http.get<any[]>(this.listBreweriesUrl + `&page=${page}&${this.formatFilters(filters)}`)
         .pipe(
             map( (breweries: any[]) => {
                   return breweries.map( brewery => {

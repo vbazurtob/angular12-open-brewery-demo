@@ -11,7 +11,13 @@ import {HttpClientModule} from "@angular/common/http";
 import {MaterialModule} from "./material.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {StoreModule} from "@ngrx/store";
-import {breweriesReducer} from "./landing-page.reducer";
+import {
+  breweriesReducer,
+  isSearchingReducer,
+  pageReducer,
+  searchFilterReducer, selectedBreweryReducer,
+  suggestionsReducer
+} from "./landing-page.reducer";
 import { DetailsPageComponent } from './details-page/details-page.component';
 
 @NgModule({
@@ -25,11 +31,19 @@ import { DetailsPageComponent } from './details-page/details-page.component';
   ],
   imports: [
     AppRoutingModule,
+    StoreModule.forRoot(
+    {
+              searchPayload: searchFilterReducer,
+              page: pageReducer,
+              breweries: breweriesReducer,
+              suggestions: suggestionsReducer,
+              isSearching: isSearchingReducer,
+              selectedBrewery: selectedBreweryReducer
+    }),
     BrowserModule,
     HttpClientModule,
     MaterialModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({ breweries: breweriesReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent]
