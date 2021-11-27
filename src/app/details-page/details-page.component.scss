@@ -12,20 +12,13 @@
 }
 
 .details-container{
-  width: 20%;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 20px;
+  padding: 16px;
 }
 
-
-//tr[follow-link]{
-//  text-decoration: underline;
-//  font-color: dodgerblue;
-//  cursor: pointer;
-//
-//}
-
-
-
-
-//tr[ng-reflect-router-link] {
-//  cursor: pointer;
-//}
+.info-container{
+  width: 30%;
+}

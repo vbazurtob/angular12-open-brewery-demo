@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {OpenBreweryService} from "../services/open-brewery.service";
 import {ActivatedRoute, Params} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {selectBreweryCoordinates, selectCurrentSelectedBrewery, selectSelectedBrewery} from "../landing-page.selector";
+import {selectBreweryCoordinates, selectCurrentSelectedBrewery} from "../landing-page.selector";
 import {updateSelectedBrewery} from "../landing-page.actions";
 
 @Component({
@@ -14,13 +14,10 @@ export class DetailsPageComponent implements OnInit {
 
   selectedBrewery$ = this.store.select(selectCurrentSelectedBrewery);
   selectBreweryCoordinates$ = this.store.select(selectBreweryCoordinates);
+  readonly defaultCenter = new google.maps.LatLng(0,0);
 
   constructor(private route: ActivatedRoute, private service: OpenBreweryService, private store: Store) { }
-
-  defaultCenter = new google.maps.LatLng(0,0);
   ngOnInit(): void {
-
-
     this.route.params.subscribe( (params: Params) =>
         {
           this.service.getById(params['id']).subscribe((d) =>

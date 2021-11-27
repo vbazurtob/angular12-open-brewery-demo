@@ -1,8 +1,9 @@
 <h3>AngularJS Challenge using NgRX</h3>
 <h4>Author: Voltaire Bazurto</h4>
 <div class="page-container">
+
     <app-autosuggest-input-field
-            [isLoading]="isSearching"
+            [isLoading]="(isSearching$ | async) || false"
             [breweries]="(suggestions$ | async) || []"
             (textChange)="debounceText($event)"></app-autosuggest-input-field>
     <app-filter-panel (filtersEventEmitter)="filterBreweries($event)" class="filters"></app-filter-panel>

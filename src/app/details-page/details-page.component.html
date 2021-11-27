@@ -1,6 +1,7 @@
 <div class="details-container">
+    <a routerLink="/" mat-raised-button color="accent">Back</a>
 
-    <div >
+    <div class="info-container">
 
         <h3>{{ (selectedBrewery$ | async)?.name}}</h3>
 
@@ -31,7 +32,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="map-container">
             <div class="flex-row flex-space-between">
                 <div>Location:</div>
                 <div>{{ (selectedBrewery$ | async)?.latitude}}</div>

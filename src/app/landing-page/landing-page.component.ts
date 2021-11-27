@@ -4,7 +4,7 @@ import { Store} from "@ngrx/store";
 import {
     selectBreweries,
     selectCurrentFilters,
-    selectCurrentPage,
+    selectCurrentPage, selectIsSearching,
     selectPageAndFilters,
     selectSuggestions
 } from "../landing-page.selector";
@@ -12,7 +12,7 @@ import {
     setCurrentBreweries,
     setSuggestionsForBreweries,
     updateCurrentPage,
-    updateFilters
+    updateFilters, updateIsSearching
 } from "../landing-page.actions";
 import {SearchFilters} from "../model/searchFilters.model";
 import {pageInitialState, suggestionsInitialState} from "../landing-page.reducer";
@@ -29,8 +29,9 @@ export class LandingPageComponent implements OnInit {
     currentPage$ = this.store.select(selectCurrentPage);
     currentFilters$ = this.store.select(selectCurrentFilters);
     currentFiltersAndPage$ = this.store.select(selectPageAndFilters);
+    isSearching$ = this.store.select(selectIsSearching);
 
-    isSearching = false;
+    // isSearching = false;
 
     constructor(
       private service: OpenBreweryService,
@@ -59,7 +60,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   debounceText(e:string){
-        this.isSearching = true;
+      this.store.dispatch(updateIsSearching({isSearching: true}))
         this.store.dispatch(setSuggestionsForBreweries({suggestions: suggestionsInitialState}));
         this.service.searchBreweries(e).subscribe(
             {
@@ -67,15 +68,13 @@ export class LandingPageComponent implements OnInit {
                     async (breweries)  => {
                         await this.delay(3000);
 
-                        this.isSearching = false;
-
+                        this.store.dispatch(updateIsSearching({isSearching: false}))
                         console.log(breweries);
                         // this.breweriesSuggestions = breweries;
                         this.store.dispatch(setSuggestionsForBreweries({suggestions: breweries}));
                     },
                 error:
-                    error => this.isSearching = false
-
+                    error => this.store.dispatch(updateIsSearching({isSearching: false}))
             }
         );
   }
