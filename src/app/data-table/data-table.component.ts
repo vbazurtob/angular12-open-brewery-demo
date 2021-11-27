@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {Brewery} from '../model/brewery.model';
 import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-data-table',
@@ -17,8 +18,12 @@ export class DataTableComponent implements OnInit {
     'name', 'type', 'city', 'country', 'link', 'phone'
   ]
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  go(id: number){
+    this.router.navigate(['details', id]);
   }
 }

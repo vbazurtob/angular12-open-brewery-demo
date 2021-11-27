@@ -10,6 +10,7 @@ import {map} from "rxjs/operators";
 export class OpenBreweryService {
 
   listBreweriesUrl = 'https://api.openbrewerydb.org/breweries?per_page=15'
+  getBreweryByIdUrl = 'https://api.openbrewerydb.org/breweries/'
 
   constructor(private http: HttpClient) { }
 
@@ -35,5 +36,9 @@ export class OpenBreweryService {
                   })  || [] ;
             })
         );
+  }
+
+  getById(id: string){
+    return this.http.get<Brewery>(this.getBreweryByIdUrl + `/${id}`);
   }
 }

@@ -8,7 +8,11 @@
         <!-- Name Column -->
         <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            <mat-cell *matCellDef="let element">
+                <a [routerLinkActive]="'follow-link'" (click)="go(element.id)">
+                    {{element.name}}
+                </a>
+            </mat-cell>
         </ng-container>
 
         <!-- Type Column -->

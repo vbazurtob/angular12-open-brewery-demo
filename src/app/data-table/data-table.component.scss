@@ -1,3 +1,9 @@
 //.table-container{
 //  width: 80%;
 //}
+
+a[ng-reflect-router-link] {
+  fontcolor: red;
+  font-weight: 700;
+  font-size: 25px;
+}

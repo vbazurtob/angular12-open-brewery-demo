@@ -12,6 +12,7 @@ import {MaterialModule} from "./material.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {StoreModule} from "@ngrx/store";
 import {breweriesReducer} from "./landing-page.reducer";
+import { DetailsPageComponent } from './details-page/details-page.component';
 
 @NgModule({
   declarations: [
@@ -19,11 +20,12 @@ import {breweriesReducer} from "./landing-page.reducer";
     AutosuggestInputFieldComponent,
     FilterPanelComponent,
     DataTableComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    DetailsPageComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     HttpClientModule,
     MaterialModule,
     BrowserAnimationsModule,

@@ -21,6 +21,7 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
     this.service.getBreweries().subscribe(
         (breweries) => {
+            console.log(breweries);
           this.store.dispatch(retrieveBreweries({ breweries }))
         }
     );

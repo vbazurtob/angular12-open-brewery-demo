@@ -1,0 +1,31 @@
+.flex-row{
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-start{
+  justify-content: flex-start;
+}
+
+.flex-space-between{
+  justify-content: space-between;
+}
+
+.details-container{
+  width: 20%;
+}
+
+
+//tr[follow-link]{
+//  text-decoration: underline;
+//  font-color: dodgerblue;
+//  cursor: pointer;
+//
+//}
+
+
+
+
+//tr[ng-reflect-router-link] {
+//  cursor: pointer;
+//}
