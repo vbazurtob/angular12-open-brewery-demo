@@ -23,3 +23,6 @@ You can check the live demo of this project [here](https://vbazurtob.github.io/a
 1. Run `npm install`
 2. Run `npm run start`
 3. Open in a web browser `http://localhost/:4200`
+
+Author: Voltaire Bazurto
+All rights reserved 2021
