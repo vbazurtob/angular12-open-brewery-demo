@@ -14,6 +14,9 @@ page.
 The details page features a details component and a
 google map component to show the brewery location.
 
+## Live demo
+You can check the live demo of this project [here](https://vbazurtob.github.io/angular12-open-brewery-demo/)
+
 
 ## How to build
 
